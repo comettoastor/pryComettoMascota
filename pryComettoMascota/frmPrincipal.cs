@@ -12,7 +12,9 @@ namespace pryComettoMascota
 {
     public partial class frmPrincipal : Form
     {
-        public string tipoMascota;
+        List<ClsMascota> lstMascotas = new List<ClsMascota>();
+        int indice;
+
         public void Limpiar()
         {
             txtNombre.Text = "";
@@ -33,49 +35,39 @@ namespace pryComettoMascota
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
+            lstMascotasForm.Items.Clear();
+
             ClsMascota clsMascota = new ClsMascota();
             clsMascota.Nombre = txtNombre.Text;
             clsMascota.Tipo = cmbTipo.Text;
-            clsMascota.Edad = nudEdad.Text;
-            if (clsMascota.Tipo == "Perro")
+            clsMascota.Edad = nudEdad.Value.ToString();
+
+            clsMascota.picMascota = new PictureBox();
+            clsMascota.picMascota.Size = new Size(300,300);
+            clsMascota.picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
+            clsMascota.picMascota.Location = new Point(12,12);
+
+            lstMascotas.Add(clsMascota);
+
+            foreach (ClsMascota mascota in lstMascotas)
             {
-                picAccion.Image = Properties.Resources.perro_imagen;
-            }
-            else if (clsMascota.Tipo == "Gato")
-            {
-                picAccion.Image = Properties.Resources.gato_imagen;
-            }
-
-            lblNombre.Text = clsMascota.Nombre;
-            lblEdad.Text = clsMascota.Edad;
-            lblNombre.Visible = true;
-            lblEdad.Visible = true;
-
-            tipoMascota = clsMascota.Tipo;
-
-            mrcAcciones.Enabled = true;
-
-            prbAlimentar.Value = 100;
-            prbJugar.Value = 100;
-            prbCuidar.Value = 100;
-
-            tmrNecesidades.Enabled = true;
-            tmrNecesidades.Start();
+                lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
+            }            
         }
 
         private void btnAlimentar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Alimentar(picAccion, tipoMascota, prbAlimentar);
+            ClsMascota.Alimentar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbAlimentar);
         }
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Jugar(picAccion, tipoMascota, prbJugar);
+            ClsMascota.Jugar(picAccion, lstMascotas[indice].Tipo, prbJugar);
         }
 
         private void btnCuidar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Cuidar(picAccion, tipoMascota, prbCuidar);
+            ClsMascota.Cuidar(picAccion, lstMascotas[indice].Tipo, prbCuidar);
         }
 
         private void tmrNecesidades_Tick(object sender, EventArgs e)
@@ -86,6 +78,7 @@ namespace pryComettoMascota
             {
                 prbAlimentar.Value = 0;
                 tmrNecesidades.Enabled = false;
+                tmrNecesidades.Dispose();
                 MessageBox.Show("Perdiste!");
                 Limpiar();
             }
@@ -98,6 +91,7 @@ namespace pryComettoMascota
             {
                 prbJugar.Value = 0;
                 tmrNecesidades.Enabled = false;
+                tmrNecesidades.Dispose();
                 MessageBox.Show("Perdiste!");
                 Limpiar();
             }
@@ -110,6 +104,7 @@ namespace pryComettoMascota
             {
                 prbCuidar.Value = 0;
                 tmrNecesidades.Enabled = false;
+                tmrNecesidades.Dispose();
                 MessageBox.Show("Perdiste!");
                 Limpiar();
             }
@@ -117,6 +112,33 @@ namespace pryComettoMascota
             {
                 prbCuidar.Value = prbCuidar.Value - valor_random;
             }
+        }
+
+        private void lstMascotasForm_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            indice = lstMascotasForm.SelectedIndex;
+
+            if (lstMascotas[indice].Tipo == "Perro")
+            {
+                picAccion.Image = Properties.Resources.perro_imagen;
+            }
+            else if (lstMascotas[indice].Tipo == "Gato")
+            {
+                picAccion.Image = Properties.Resources.gato_imagen;
+            }
+
+            lblNombre.Text = lstMascotas[indice].Nombre;
+            lblEdad.Text = lstMascotas[indice].Edad;
+            lblNombre.Visible = true;
+            lblEdad.Visible = true;
+
+            mrcAcciones.Enabled = true;
+
+            prbAlimentar.Value = 100;
+            prbJugar.Value = 100;
+            prbCuidar.Value = 100;
+
+            tmrNecesidades.Enabled = true;
         }
     }
 }

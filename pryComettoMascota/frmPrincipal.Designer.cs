@@ -42,12 +42,13 @@
             this.btnCrear = new System.Windows.Forms.Button();
             this.lblNombreCrear = new System.Windows.Forms.Label();
             this.mrcAcciones = new System.Windows.Forms.GroupBox();
-            this.mrcCrearMascota = new System.Windows.Forms.GroupBox();
-            this.lblTipo = new System.Windows.Forms.Label();
-            this.lblEdadCrear = new System.Windows.Forms.Label();
-            this.prbAlimentar = new System.Windows.Forms.ProgressBar();
-            this.prbJugar = new System.Windows.Forms.ProgressBar();
             this.prbCuidar = new System.Windows.Forms.ProgressBar();
+            this.prbJugar = new System.Windows.Forms.ProgressBar();
+            this.prbAlimentar = new System.Windows.Forms.ProgressBar();
+            this.mrcCrearMascota = new System.Windows.Forms.GroupBox();
+            this.lstMascotasForm = new System.Windows.Forms.ListBox();
+            this.lblEdadCrear = new System.Windows.Forms.Label();
+            this.lblTipo = new System.Windows.Forms.Label();
             this.tmrNecesidades = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picAccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).BeginInit();
@@ -57,9 +58,9 @@
             // 
             // picAccion
             // 
-            this.picAccion.Location = new System.Drawing.Point(58, 33);
+            this.picAccion.Location = new System.Drawing.Point(12, 12);
             this.picAccion.Name = "picAccion";
-            this.picAccion.Size = new System.Drawing.Size(341, 247);
+            this.picAccion.Size = new System.Drawing.Size(300, 300);
             this.picAccion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picAccion.TabIndex = 0;
             this.picAccion.TabStop = false;
@@ -97,7 +98,7 @@
             // lblNombre
             // 
             this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(61, 36);
+            this.lblNombre.Location = new System.Drawing.Point(23, 18);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(44, 13);
             this.lblNombre.TabIndex = 2;
@@ -107,7 +108,7 @@
             // lblEdad
             // 
             this.lblEdad.AutoSize = true;
-            this.lblEdad.Location = new System.Drawing.Point(370, 36);
+            this.lblEdad.Location = new System.Drawing.Point(270, 18);
             this.lblEdad.Name = "lblEdad";
             this.lblEdad.Size = new System.Drawing.Size(32, 13);
             this.lblEdad.TabIndex = 3;
@@ -167,15 +168,37 @@
             this.mrcAcciones.Controls.Add(this.btnAlimentar);
             this.mrcAcciones.Controls.Add(this.btnCuidar);
             this.mrcAcciones.Controls.Add(this.btnJugar);
-            this.mrcAcciones.Location = new System.Drawing.Point(429, 58);
+            this.mrcAcciones.Location = new System.Drawing.Point(318, 12);
             this.mrcAcciones.Name = "mrcAcciones";
             this.mrcAcciones.Size = new System.Drawing.Size(230, 204);
             this.mrcAcciones.TabIndex = 1;
             this.mrcAcciones.TabStop = false;
             this.mrcAcciones.Text = "Acciones";
             // 
+            // prbCuidar
+            // 
+            this.prbCuidar.Location = new System.Drawing.Point(118, 155);
+            this.prbCuidar.Name = "prbCuidar";
+            this.prbCuidar.Size = new System.Drawing.Size(100, 23);
+            this.prbCuidar.TabIndex = 6;
+            // 
+            // prbJugar
+            // 
+            this.prbJugar.Location = new System.Drawing.Point(118, 94);
+            this.prbJugar.Name = "prbJugar";
+            this.prbJugar.Size = new System.Drawing.Size(100, 23);
+            this.prbJugar.TabIndex = 5;
+            // 
+            // prbAlimentar
+            // 
+            this.prbAlimentar.Location = new System.Drawing.Point(118, 35);
+            this.prbAlimentar.Name = "prbAlimentar";
+            this.prbAlimentar.Size = new System.Drawing.Size(100, 23);
+            this.prbAlimentar.TabIndex = 4;
+            // 
             // mrcCrearMascota
             // 
+            this.mrcCrearMascota.Controls.Add(this.lstMascotasForm);
             this.mrcCrearMascota.Controls.Add(this.lblEdadCrear);
             this.mrcCrearMascota.Controls.Add(this.lblTipo);
             this.mrcCrearMascota.Controls.Add(this.lblNombreCrear);
@@ -183,21 +206,21 @@
             this.mrcCrearMascota.Controls.Add(this.btnCrear);
             this.mrcCrearMascota.Controls.Add(this.txtNombre);
             this.mrcCrearMascota.Controls.Add(this.nudEdad);
-            this.mrcCrearMascota.Location = new System.Drawing.Point(26, 286);
+            this.mrcCrearMascota.Location = new System.Drawing.Point(12, 318);
             this.mrcCrearMascota.Name = "mrcCrearMascota";
-            this.mrcCrearMascota.Size = new System.Drawing.Size(402, 75);
+            this.mrcCrearMascota.Size = new System.Drawing.Size(402, 195);
             this.mrcCrearMascota.TabIndex = 0;
             this.mrcCrearMascota.TabStop = false;
             this.mrcCrearMascota.Text = "Crear Mascota";
             // 
-            // lblTipo
+            // lstMascotasForm
             // 
-            this.lblTipo.AutoSize = true;
-            this.lblTipo.Location = new System.Drawing.Point(112, 20);
-            this.lblTipo.Name = "lblTipo";
-            this.lblTipo.Size = new System.Drawing.Size(31, 13);
-            this.lblTipo.TabIndex = 5;
-            this.lblTipo.Text = "Tipo:";
+            this.lstMascotasForm.FormattingEnabled = true;
+            this.lstMascotasForm.Location = new System.Drawing.Point(9, 68);
+            this.lstMascotasForm.Name = "lstMascotasForm";
+            this.lstMascotasForm.Size = new System.Drawing.Size(291, 121);
+            this.lstMascotasForm.TabIndex = 4;
+            this.lstMascotasForm.SelectedIndexChanged += new System.EventHandler(this.lstMascotasForm_SelectedIndexChanged);
             // 
             // lblEdadCrear
             // 
@@ -208,26 +231,14 @@
             this.lblEdadCrear.TabIndex = 6;
             this.lblEdadCrear.Text = "Edad:";
             // 
-            // prbAlimentar
+            // lblTipo
             // 
-            this.prbAlimentar.Location = new System.Drawing.Point(118, 35);
-            this.prbAlimentar.Name = "prbAlimentar";
-            this.prbAlimentar.Size = new System.Drawing.Size(100, 23);
-            this.prbAlimentar.TabIndex = 4;
-            // 
-            // prbJugar
-            // 
-            this.prbJugar.Location = new System.Drawing.Point(118, 94);
-            this.prbJugar.Name = "prbJugar";
-            this.prbJugar.Size = new System.Drawing.Size(100, 23);
-            this.prbJugar.TabIndex = 5;
-            // 
-            // prbCuidar
-            // 
-            this.prbCuidar.Location = new System.Drawing.Point(118, 155);
-            this.prbCuidar.Name = "prbCuidar";
-            this.prbCuidar.Size = new System.Drawing.Size(100, 23);
-            this.prbCuidar.TabIndex = 6;
+            this.lblTipo.AutoSize = true;
+            this.lblTipo.Location = new System.Drawing.Point(112, 20);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(31, 13);
+            this.lblTipo.TabIndex = 5;
+            this.lblTipo.Text = "Tipo:";
             // 
             // tmrNecesidades
             // 
@@ -238,7 +249,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 369);
+            this.ClientSize = new System.Drawing.Size(554, 517);
             this.Controls.Add(this.mrcCrearMascota);
             this.Controls.Add(this.mrcAcciones);
             this.Controls.Add(this.lblEdad);
@@ -278,6 +289,7 @@
         private System.Windows.Forms.ProgressBar prbJugar;
         private System.Windows.Forms.ProgressBar prbAlimentar;
         private System.Windows.Forms.Timer tmrNecesidades;
+        private System.Windows.Forms.ListBox lstMascotasForm;
     }
 }
 

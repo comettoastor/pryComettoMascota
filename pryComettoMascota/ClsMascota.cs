@@ -13,6 +13,7 @@ namespace pryComettoMascota
         public string Nombre { get; set; }
         public string Edad { get; set; }
         public string Tipo { get; set; }
+        public PictureBox picMascota { get; set; }
         
         public static void Alimentar(PictureBox pictureBox, string Tipo, ProgressBar necesidad)
         {
