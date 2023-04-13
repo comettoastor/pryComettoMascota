@@ -19,11 +19,11 @@ namespace pryComettoMascota
         {
             if (Tipo == "Perro")
             {
-                pictureBox.Image = Properties.Resources.perro_comiendo;
+                pictureBox.ImageLocation = "perro_comiendo.gif";
             }
             else if (Tipo == "Gato")
             {
-                pictureBox.Image = Properties.Resources.gato_comer;
+                pictureBox.ImageLocation = "gato_comer.gif";
             }
             if (necesidad.Value + 10 > 100)
             {
@@ -38,11 +38,11 @@ namespace pryComettoMascota
         {
             if (Tipo == "Perro")
             {
-                pictureBox.Image = Properties.Resources.perro_jugando;
+                pictureBox.ImageLocation = "perro_jugando.gif";
             }
             else if (Tipo == "Gato")
             {
-                pictureBox.Image = Properties.Resources.gato_jugar;
+                pictureBox.ImageLocation = "gato_jugar.gif";
             }
             if (necesidad.Value + 10 > 100)
             {
@@ -57,11 +57,11 @@ namespace pryComettoMascota
         {
             if (Tipo == "Perro")
             {
-                pictureBox.Image = Properties.Resources.perro_cuidado;
+                pictureBox.ImageLocation = "perro_cuidado.gif";
             }
             else if (Tipo == "Gato")
             {
-                pictureBox.Image = Properties.Resources.gato_cuidar;
+                pictureBox.ImageLocation = "gato_cuidar.gif";
             }
             if (necesidad.Value + 10 > 100)
             {

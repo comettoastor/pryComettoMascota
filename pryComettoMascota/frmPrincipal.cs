@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace pryComettoMascota
 {
@@ -22,7 +23,6 @@ namespace pryComettoMascota
             nudEdad.Value = 0;
             lblNombre.Text = "";
             lblEdad.Text = "";
-            picAccion.Image = null;
             prbAlimentar.Value = 100;
             prbJugar.Value = 100;
             prbCuidar.Value = 100;
@@ -35,6 +35,8 @@ namespace pryComettoMascota
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
+            StreamWriter streamWriter = new StreamWriter("mascotas.txt",true);
+
             lstMascotasForm.Items.Clear();
 
             ClsMascota clsMascota = new ClsMascota();
@@ -46,8 +48,11 @@ namespace pryComettoMascota
             clsMascota.picMascota.Size = new Size(300,300);
             clsMascota.picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
             clsMascota.picMascota.Location = new Point(12,12);
+            Controls.Add(clsMascota.picMascota);
 
             lstMascotas.Add(clsMascota);
+            streamWriter.WriteLine(clsMascota.Nombre + " | " + clsMascota.Tipo + " | " + clsMascota.Edad);
+            streamWriter.Close();
 
             foreach (ClsMascota mascota in lstMascotas)
             {
@@ -62,12 +67,12 @@ namespace pryComettoMascota
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Jugar(picAccion, lstMascotas[indice].Tipo, prbJugar);
+            ClsMascota.Jugar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbJugar);
         }
 
         private void btnCuidar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Cuidar(picAccion, lstMascotas[indice].Tipo, prbCuidar);
+            ClsMascota.Cuidar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbCuidar);
         }
 
         private void tmrNecesidades_Tick(object sender, EventArgs e)
@@ -117,28 +122,32 @@ namespace pryComettoMascota
         private void lstMascotasForm_SelectedIndexChanged(object sender, EventArgs e)
         {
             indice = lstMascotasForm.SelectedIndex;
-
-            if (lstMascotas[indice].Tipo == "Perro")
+            if (indice != -1)
             {
-                picAccion.Image = Properties.Resources.perro_imagen;
+                if (lstMascotas[indice].Tipo == "Perro")
+                {
+                    lstMascotas[indice].picMascota.ImageLocation = "perro_imagen.jpg";
+                    lstMascotas[indice].picMascota.BringToFront();
+                }
+                else if (lstMascotas[indice].Tipo == "Gato")
+                {
+                    lstMascotas[indice].picMascota.ImageLocation = "gato_imagen.gif";
+                    lstMascotas[indice].picMascota.BringToFront();
+                }
+
+                lblNombre.Text = lstMascotas[indice].Nombre;
+                lblEdad.Text = lstMascotas[indice].Edad;
+                lblNombre.Visible = true;
+                lblEdad.Visible = true;
+
+                mrcAcciones.Enabled = true;
+
+                prbAlimentar.Value = 100;
+                prbJugar.Value = 100;
+                prbCuidar.Value = 100;
+
+                tmrNecesidades.Enabled = true;
             }
-            else if (lstMascotas[indice].Tipo == "Gato")
-            {
-                picAccion.Image = Properties.Resources.gato_imagen;
-            }
-
-            lblNombre.Text = lstMascotas[indice].Nombre;
-            lblEdad.Text = lstMascotas[indice].Edad;
-            lblNombre.Visible = true;
-            lblEdad.Visible = true;
-
-            mrcAcciones.Enabled = true;
-
-            prbAlimentar.Value = 100;
-            prbJugar.Value = 100;
-            prbCuidar.Value = 100;
-
-            tmrNecesidades.Enabled = true;
         }
     }
 }

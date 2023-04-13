@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPrincipal));
-            this.picAccion = new System.Windows.Forms.PictureBox();
             this.btnAlimentar = new System.Windows.Forms.Button();
             this.btnCuidar = new System.Windows.Forms.Button();
             this.btnJugar = new System.Windows.Forms.Button();
@@ -50,20 +49,10 @@
             this.lblEdadCrear = new System.Windows.Forms.Label();
             this.lblTipo = new System.Windows.Forms.Label();
             this.tmrNecesidades = new System.Windows.Forms.Timer(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.picAccion)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).BeginInit();
             this.mrcAcciones.SuspendLayout();
             this.mrcCrearMascota.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // picAccion
-            // 
-            this.picAccion.Location = new System.Drawing.Point(12, 12);
-            this.picAccion.Name = "picAccion";
-            this.picAccion.Size = new System.Drawing.Size(300, 300);
-            this.picAccion.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picAccion.TabIndex = 0;
-            this.picAccion.TabStop = false;
             // 
             // btnAlimentar
             // 
@@ -254,11 +243,9 @@
             this.Controls.Add(this.mrcAcciones);
             this.Controls.Add(this.lblEdad);
             this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.picAccion);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPrincipal";
             this.Text = "Mascopet";
-            ((System.ComponentModel.ISupportInitialize)(this.picAccion)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).EndInit();
             this.mrcAcciones.ResumeLayout(false);
             this.mrcCrearMascota.ResumeLayout(false);
@@ -269,8 +256,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox picAccion;
         private System.Windows.Forms.Button btnAlimentar;
         private System.Windows.Forms.Button btnCuidar;
         private System.Windows.Forms.Button btnJugar;
