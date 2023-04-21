@@ -14,7 +14,8 @@ namespace pryComettoMascota
     public partial class frmPrincipal : Form
     {
         List<ClsMascota> lstMascotas = new List<ClsMascota>();
-        int indice;
+        int indice = 0;
+        bool borrado = false;
 
         public void Limpiar()
         {
@@ -27,6 +28,7 @@ namespace pryComettoMascota
             prbJugar.Value = 100;
             prbCuidar.Value = 100;
             mrcAcciones.Enabled = false;
+            tmrNecesidades.Enabled = false;
         }
         public frmPrincipal()
         {
@@ -35,29 +37,38 @@ namespace pryComettoMascota
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            StreamWriter streamWriter = new StreamWriter("mascotas.txt",true);
-
-            lstMascotasForm.Items.Clear();
-
-            ClsMascota clsMascota = new ClsMascota();
-            clsMascota.Nombre = txtNombre.Text;
-            clsMascota.Tipo = cmbTipo.Text;
-            clsMascota.Edad = nudEdad.Value.ToString();
-
-            clsMascota.picMascota = new PictureBox();
-            clsMascota.picMascota.Size = new Size(300,300);
-            clsMascota.picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
-            clsMascota.picMascota.Location = new Point(12,12);
-            Controls.Add(clsMascota.picMascota);
-
-            lstMascotas.Add(clsMascota);
-            streamWriter.WriteLine(clsMascota.Nombre + " | " + clsMascota.Tipo + " | " + clsMascota.Edad);
-            streamWriter.Close();
-
-            foreach (ClsMascota mascota in lstMascotas)
+            if (txtNombre.Text != "" && cmbTipo.SelectedIndex != -1 && nudEdad.Text != "")
             {
-                lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
-            }            
+                StreamWriter streamWriter = new StreamWriter("mascotas.txt", true);
+
+                lstMascotasForm.Items.Clear();
+
+                ClsMascota clsMascota = new ClsMascota();
+                clsMascota.Nombre = txtNombre.Text;
+                clsMascota.Tipo = cmbTipo.Text;
+                clsMascota.Edad = nudEdad.Value.ToString();
+
+                clsMascota.picMascota = new PictureBox();
+                clsMascota.picMascota.Size = new Size(300, 300);
+                clsMascota.picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
+                clsMascota.picMascota.Location = new Point(12, 12);
+                Controls.Add(clsMascota.picMascota);
+
+                lstMascotas.Add(clsMascota);
+                streamWriter.WriteLine(clsMascota.Nombre + " | " + clsMascota.Tipo + " | " + clsMascota.Edad);
+                streamWriter.Close();
+
+                mrcAcciones.Enabled = true;
+
+                foreach (ClsMascota mascota in lstMascotas)
+                {
+                    lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error - Faltan datos por completar!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
         private void btnAlimentar_Click(object sender, EventArgs e)
@@ -121,9 +132,15 @@ namespace pryComettoMascota
 
         private void lstMascotasForm_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (borrado == false && indice != -1)
+            {
+                lstMascotas[indice].picMascota.ImageLocation = "";
+            }
             indice = lstMascotasForm.SelectedIndex;
+            borrado = false;
             if (indice != -1)
             {
+                btnEliminar.Enabled = true;
                 if (lstMascotas[indice].Tipo == "Perro")
                 {
                     lstMascotas[indice].picMascota.ImageLocation = "perro_imagen.jpg";
@@ -148,6 +165,20 @@ namespace pryComettoMascota
 
                 tmrNecesidades.Enabled = true;
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            lstMascotas[indice].picMascota.ImageLocation = "";
+            lstMascotas.RemoveAt(indice);
+            lstMascotasForm.Items.Clear();
+            foreach (ClsMascota mascota in lstMascotas)
+            {
+                lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
+            }
+            Limpiar();
+            borrado = true;
+            btnEliminar.Enabled = false;
         }
     }
 }

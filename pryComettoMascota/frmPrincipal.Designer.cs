@@ -49,6 +49,7 @@
             this.lblEdadCrear = new System.Windows.Forms.Label();
             this.lblTipo = new System.Windows.Forms.Label();
             this.tmrNecesidades = new System.Windows.Forms.Timer(this.components);
+            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).BeginInit();
             this.mrcAcciones.SuspendLayout();
             this.mrcCrearMascota.SuspendLayout();
@@ -157,6 +158,7 @@
             this.mrcAcciones.Controls.Add(this.btnAlimentar);
             this.mrcAcciones.Controls.Add(this.btnCuidar);
             this.mrcAcciones.Controls.Add(this.btnJugar);
+            this.mrcAcciones.Enabled = false;
             this.mrcAcciones.Location = new System.Drawing.Point(318, 12);
             this.mrcAcciones.Name = "mrcAcciones";
             this.mrcAcciones.Size = new System.Drawing.Size(230, 204);
@@ -187,6 +189,7 @@
             // 
             // mrcCrearMascota
             // 
+            this.mrcCrearMascota.Controls.Add(this.btnEliminar);
             this.mrcCrearMascota.Controls.Add(this.lstMascotasForm);
             this.mrcCrearMascota.Controls.Add(this.lblEdadCrear);
             this.mrcCrearMascota.Controls.Add(this.lblTipo);
@@ -234,6 +237,17 @@
             this.tmrNecesidades.Interval = 1000;
             this.tmrNecesidades.Tick += new System.EventHandler(this.tmrNecesidades_Tick);
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(322, 68);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(74, 33);
+            this.btnEliminar.TabIndex = 7;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,6 +289,7 @@
         private System.Windows.Forms.ProgressBar prbAlimentar;
         private System.Windows.Forms.Timer tmrNecesidades;
         private System.Windows.Forms.ListBox lstMascotasForm;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }
 
