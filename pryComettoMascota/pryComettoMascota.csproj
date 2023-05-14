@@ -82,31 +82,31 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\perro_cuidado.gif" />
+    <None Include="bin\Debug\gato_comer.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\perro_comiendo.gif" />
+    <None Include="bin\Debug\gato_cuidar.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\perro_jugando.gif" />
+    <None Include="bin\Debug\gato_imagen.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gato_imagen.gif" />
+    <None Include="bin\Debug\gato_jugar.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\perro_imagen.jpg" />
+    <None Include="bin\Debug\perro_comiendo.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gato_cuidar.gif" />
+    <None Include="bin\Debug\perro_cuidado.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gato_comer.gif" />
+    <None Include="bin\Debug\perro_imagen.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gato_jugar.gif" />
+    <None Include="bin\Debug\perro_jugando.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\perro_imagen.ico" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
