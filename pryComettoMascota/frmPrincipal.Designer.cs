@@ -45,11 +45,11 @@
             this.prbJugar = new System.Windows.Forms.ProgressBar();
             this.prbAlimentar = new System.Windows.Forms.ProgressBar();
             this.mrcCrearMascota = new System.Windows.Forms.GroupBox();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.lstMascotasForm = new System.Windows.Forms.ListBox();
             this.lblEdadCrear = new System.Windows.Forms.Label();
             this.lblTipo = new System.Windows.Forms.Label();
             this.tmrNecesidades = new System.Windows.Forms.Timer(this.components);
-            this.btnEliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).BeginInit();
             this.mrcAcciones.SuspendLayout();
             this.mrcCrearMascota.SuspendLayout();
@@ -205,6 +205,17 @@
             this.mrcCrearMascota.TabStop = false;
             this.mrcCrearMascota.Text = "Crear Mascota";
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Location = new System.Drawing.Point(322, 68);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(74, 33);
+            this.btnEliminar.TabIndex = 7;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // lstMascotasForm
             // 
             this.lstMascotasForm.FormattingEnabled = true;
@@ -237,17 +248,6 @@
             this.tmrNecesidades.Interval = 1000;
             this.tmrNecesidades.Tick += new System.EventHandler(this.tmrNecesidades_Tick);
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(322, 68);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(74, 33);
-            this.btnEliminar.TabIndex = 7;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,6 +259,7 @@
             this.Controls.Add(this.lblNombre);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Mascopet";
             ((System.ComponentModel.ISupportInitialize)(this.nudEdad)).EndInit();
             this.mrcAcciones.ResumeLayout(false);
