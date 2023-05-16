@@ -39,8 +39,6 @@ namespace pryComettoMascota
         {
             if (txtNombre.Text != "" && cmbTipo.SelectedIndex != -1 && nudEdad.Text != "")
             {
-                StreamWriter streamWriter = new StreamWriter("mascotas.txt", true);
-
                 lstMascotasForm.Items.Clear();
 
                 ClsMascota clsMascota = new ClsMascota();
@@ -53,10 +51,6 @@ namespace pryComettoMascota
                 clsMascota.picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
                 clsMascota.picMascota.Location = new Point(12, 12);
                 Controls.Add(clsMascota.picMascota);
-
-                lstMascotas.Add(clsMascota);
-                streamWriter.WriteLine(clsMascota.Nombre + " | " + clsMascota.Tipo + " | " + clsMascota.Edad);
-                streamWriter.Close();
 
                 mrcAcciones.Enabled = true;
 
