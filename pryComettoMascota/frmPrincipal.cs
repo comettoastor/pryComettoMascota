@@ -13,7 +13,7 @@ namespace pryComettoMascota
 {
     public partial class frmPrincipal : Form
     {
-        List<ClsMascota> lstMascotas = new List<ClsMascota>();
+        List<clsMascota> lstMascotas = new List<clsMascota>();
         int indice = 0;
         bool borrado = false;
 
@@ -41,7 +41,7 @@ namespace pryComettoMascota
             {
                 lstMascotasForm.Items.Clear();
 
-                ClsMascota clsMascota = new ClsMascota();
+                clsMascota clsMascota = new clsMascota();
                 clsMascota.Nombre = txtNombre.Text;
                 clsMascota.Tipo = cmbTipo.Text;
                 clsMascota.Edad = nudEdad.Value.ToString();
@@ -54,7 +54,7 @@ namespace pryComettoMascota
 
                 mrcAcciones.Enabled = true;
 
-                foreach (ClsMascota mascota in lstMascotas)
+                foreach (clsMascota mascota in lstMascotas)
                 {
                     lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
                 }
@@ -67,17 +67,17 @@ namespace pryComettoMascota
 
         private void btnAlimentar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Alimentar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbAlimentar);
+            clsMascota.Alimentar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbAlimentar);
         }
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Jugar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbJugar);
+            clsMascota.Jugar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbJugar);
         }
 
         private void btnCuidar_Click(object sender, EventArgs e)
         {
-            ClsMascota.Cuidar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbCuidar);
+            clsMascota.Cuidar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbCuidar);
         }
 
         private void tmrNecesidades_Tick(object sender, EventArgs e)
@@ -166,7 +166,7 @@ namespace pryComettoMascota
             lstMascotas[indice].picMascota.ImageLocation = "";
             lstMascotas.RemoveAt(indice);
             lstMascotasForm.Items.Clear();
-            foreach (ClsMascota mascota in lstMascotas)
+            foreach (clsMascota mascota in lstMascotas)
             {
                 lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
             }

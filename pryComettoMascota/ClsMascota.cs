@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace pryComettoMascota
 {
-    internal class ClsMascota
+    internal class clsMascota
     {
         //nombre, la edad y el tipo de animal. Luego, crear métodos para alimentar, jugar y cuidar a la mascota.
         public string Nombre { get; set; }
