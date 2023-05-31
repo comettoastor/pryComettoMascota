@@ -14,8 +14,7 @@ namespace pryComettoMascota
     public partial class frmPrincipal : Form
     {
         List<clsMascota> lstMascotas = new List<clsMascota>();
-        int indice = 0;
-        bool borrado = false;
+        int indice;
 
         public void Limpiar()
         {
@@ -30,6 +29,7 @@ namespace pryComettoMascota
             mrcAcciones.Enabled = false;
             tmrNecesidades.Enabled = false;
         }
+
         public frmPrincipal()
         {
             InitializeComponent();
@@ -37,133 +37,55 @@ namespace pryComettoMascota
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
-            if (txtNombre.Text != "" && cmbTipo.SelectedIndex != -1 && nudEdad.Text != "")
+            clsMascota objMascota = new clsMascota();
+            if (objMascota.Crear(txtNombre, cmbTipo, nudEdad, lstMascotasForm, mrcAcciones) == 1)
             {
+                lstMascotas.Add(objMascota);
+                this.Controls.Add(objMascota.picMascota);
                 lstMascotasForm.Items.Clear();
-
-                clsMascota clsMascota = new clsMascota();
-                clsMascota.Nombre = txtNombre.Text;
-                clsMascota.Tipo = cmbTipo.Text;
-                clsMascota.Edad = nudEdad.Value.ToString();
-
-                clsMascota.picMascota = new PictureBox();
-                clsMascota.picMascota.Size = new Size(300, 300);
-                clsMascota.picMascota.SizeMode = PictureBoxSizeMode.StretchImage;
-                clsMascota.picMascota.Location = new Point(12, 12);
-                Controls.Add(clsMascota.picMascota);
-
-                mrcAcciones.Enabled = true;
-
                 foreach (clsMascota mascota in lstMascotas)
                 {
                     lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
                 }
             }
-            else
-            {
-                MessageBox.Show("Error - Faltan datos por completar!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
         }
 
         private void btnAlimentar_Click(object sender, EventArgs e)
         {
-            clsMascota.Alimentar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbAlimentar);
+            lstMascotas[indice].Alimentar(prbAlimentar);
         }
 
         private void btnJugar_Click(object sender, EventArgs e)
         {
-            clsMascota.Jugar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbJugar);
+            lstMascotas[indice].Jugar(prbJugar);
         }
 
         private void btnCuidar_Click(object sender, EventArgs e)
         {
-            clsMascota.Cuidar(lstMascotas[indice].picMascota, lstMascotas[indice].Tipo, prbCuidar);
+            lstMascotas[indice].Cuidar(prbCuidar);
         }
 
         private void tmrNecesidades_Tick(object sender, EventArgs e)
         {
-            Random random = new Random();
-            int valor_random = random.Next(1, 5);
-            if (prbAlimentar.Value - valor_random < 0)
+            if (clsMascota.Necesidades(prbAlimentar, prbJugar, prbCuidar, tmrNecesidades) == 1)
             {
-                prbAlimentar.Value = 0;
-                tmrNecesidades.Enabled = false;
-                tmrNecesidades.Dispose();
-                MessageBox.Show("Perdiste!");
                 Limpiar();
-            }
-            else
-            {
-                prbAlimentar.Value = prbAlimentar.Value - valor_random;
-            }
-            valor_random = random.Next(1, 5);
-            if (prbJugar.Value - valor_random < 0)
-            {
-                prbJugar.Value = 0;
-                tmrNecesidades.Enabled = false;
-                tmrNecesidades.Dispose();
-                MessageBox.Show("Perdiste!");
-                Limpiar();
-            }
-            else
-            {
-                prbJugar.Value = prbJugar.Value - valor_random;
-            }
-            valor_random = random.Next(1, 5);
-            if (prbCuidar.Value - valor_random < 0)
-            {
-                prbCuidar.Value = 0;
-                tmrNecesidades.Enabled = false;
-                tmrNecesidades.Dispose();
-                MessageBox.Show("Perdiste!");
-                Limpiar();
-            }
-            else
-            {
-                prbCuidar.Value = prbCuidar.Value - valor_random;
             }
         }
 
         private void lstMascotasForm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (borrado == false && indice != -1)
-            {
-                lstMascotas[indice].picMascota.ImageLocation = "";
-            }
             indice = lstMascotasForm.SelectedIndex;
-            borrado = false;
             if (indice != -1)
             {
-                btnEliminar.Enabled = true;
-                if (lstMascotas[indice].Tipo == "Perro")
-                {
-                    lstMascotas[indice].picMascota.ImageLocation = "perro_imagen.jpg";
-                    lstMascotas[indice].picMascota.BringToFront();
-                }
-                else if (lstMascotas[indice].Tipo == "Gato")
-                {
-                    lstMascotas[indice].picMascota.ImageLocation = "gato_imagen.gif";
-                    lstMascotas[indice].picMascota.BringToFront();
-                }
-
-                lblNombre.Text = lstMascotas[indice].Nombre;
-                lblEdad.Text = lstMascotas[indice].Edad;
-                lblNombre.Visible = true;
-                lblEdad.Visible = true;
-
-                mrcAcciones.Enabled = true;
-
-                prbAlimentar.Value = 100;
-                prbJugar.Value = 100;
-                prbCuidar.Value = 100;
-
-                tmrNecesidades.Enabled = true;
+                lstMascotas[indice].Cambio(indice, lstMascotasForm, btnEliminar, lblNombre, lblEdad, mrcAcciones, prbAlimentar, prbJugar, prbCuidar, tmrNecesidades);
             }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            lstMascotas[indice].picMascota.ImageLocation = "";
+            this.Controls.Remove(lstMascotas[indice].picMascota);
+            lstMascotas[indice].picMascota.Dispose();
             lstMascotas.RemoveAt(indice);
             lstMascotasForm.Items.Clear();
             foreach (clsMascota mascota in lstMascotas)
@@ -171,7 +93,6 @@ namespace pryComettoMascota
                 lstMascotasForm.Items.Add(mascota.Nombre + " | " + mascota.Tipo + " | " + mascota.Edad);
             }
             Limpiar();
-            borrado = true;
             btnEliminar.Enabled = false;
         }
     }
